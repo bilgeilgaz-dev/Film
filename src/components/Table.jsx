@@ -13,7 +13,6 @@ export default function DataTable({isLoading, movies, totalResult, setPage, page
   if(!movies || movies.length === 0) {
     return <Skeleton sx={{ height: 500, width: '100%' }} variant="rectangular" animation="wave"/>
   }
-  console.log('page', page)
   let copyMovies = [];
 
   movies.forEach(movie => {
@@ -28,7 +27,7 @@ export default function DataTable({isLoading, movies, totalResult, setPage, page
   };
 
   return (
-    <div style={{ height: 400, width: '100%', margin: '20px' }}>
+    <div style={{ height: 630, width: '100%' }}>
       <DataGrid
         pagination
         rows={copyMovies}
