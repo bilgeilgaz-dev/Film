@@ -4,40 +4,42 @@ import { Skeleton } from '@mui/material';
 
 const columns = [
   { field: 'imdbID', headerName: 'IMDB Id', width: 130 },
-  { field: 'Title', headerName: 'Baslik', width: 200 },
+  { field: 'Title', headerName: 'Baslik', width: 500 },
   { field: 'Type', headerName: 'Type', width: 130 },
   { field: 'Year', headerName: 'Year', width: 130 },
 ];
 
 export default function DataTable({isLoading, movies, totalResult, setPage, page, getSelectedMovieDetails}) {
-
-  if(isLoading || !movies || movies.length === 0) {
-    return <Skeleton sx={{ height: 400, width: '100%' }} variant="rectangular" animation="wave"/>
+  if(!movies || movies.length === 0) {
+    return <Skeleton sx={{ height: 500, width: '100%' }} variant="rectangular" animation="wave"/>
   }
-
+  console.log('page', page)
   let copyMovies = [];
 
   movies.forEach(movie => {
+
     movie.id = movie.imdbID;
     copyMovies.push(movie);
   });
+  
 
-  const handleChangePage = (event, newPage) => {
-    console.log('newPage', newPage)
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '100%', margin: '20px' }}>
       <DataGrid
+        pagination
         rows={copyMovies}
         columns={columns}
         pageSize={10}
-        count={totalResult}
+        rowCount={Number(totalResult)}
         rowsPerPageOptions={[10]}
         onRowClick={(e) => getSelectedMovieDetails(e.id)}
-        /* page={page}
-        onPageChange={handleChangePage} */
+        onPageChange={handleChangePage}
+        paginationMode="server"
+        loading={isLoading}
       />
     </div>
   );

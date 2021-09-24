@@ -21,13 +21,10 @@ export default function BasicTextFields({setMovieName, setYear, setType, selecte
       autoComplete="off"
     >
       <TextField
-        id="filled-select-currency"
         select
-        label="Select"
+        label="Type"
         value={selectedType}
         onChange={setType}
-        helperText="Please select your currency"
-        variant="filled"
       >
         {types.map((option) => (
           <MenuItem key={option.value} value={option.value}>
